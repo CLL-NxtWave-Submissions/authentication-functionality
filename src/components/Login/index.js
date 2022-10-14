@@ -1,10 +1,10 @@
 import {Redirect} from 'react-router-dom'
-import Cookie from 'js-cookie'
+import Cookies from 'js-cookie'
 import './index.css'
 
 const Login = props => {
   const isUserAuthenticated = () => {
-    const jwtTokenValue = Cookie.get('jwt_token')
+    const jwtTokenValue = Cookies.get('jwt_token')
     return jwtTokenValue !== undefined
   }
 
@@ -20,11 +20,14 @@ const Login = props => {
 
     const loginResponse = await fetch(loginUrl, loginRequestOptions)
     const responseData = await loginResponse.json()
-    const {jwtToken} = responseData.jwt_token
 
-    Cookie.set('jwt_token', jwtToken, {expires: 30})
-    const {history} = props
-    history.replace('/')
+    if (loginResponse.ok) {
+      const {jwtToken} = responseData.jwt_token
+
+      Cookies.set('jwt_token', jwtToken, {expires: 30})
+      const {history} = props
+      history.replace('/')
+    }
   }
 
   const userIsAuthenticated = isUserAuthenticated()
