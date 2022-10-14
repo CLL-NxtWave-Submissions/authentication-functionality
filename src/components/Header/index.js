@@ -3,11 +3,11 @@ import './index.css'
 
 const Header = () => (
   <ul className="header-bg-container">
-    <Link to="/">
+    <Link className="header-nav-link" to="/">
       <li>Home</li>
     </Link>
 
-    <Link to="/about">
+    <Link className="header-nav-link" to="/about">
       <li>About</li>
     </Link>
   </ul>
