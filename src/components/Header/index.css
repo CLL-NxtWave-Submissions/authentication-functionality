@@ -1,1 +1,5 @@
-/* Write your CSS code here */
+.header-bg-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
